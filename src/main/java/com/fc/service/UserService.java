@@ -1,13 +1,16 @@
 package com.fc.service;
 
 import com.fc.async.MailTask;
+import com.fc.mapper.ConfigMapper;
 import com.fc.mapper.UserMapper;
 import com.fc.model.Info;
 import com.fc.model.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Transaction;
@@ -20,6 +23,9 @@ public class UserService {
 
     @Autowired
     private UserMapper userMapper;
+    
+    @Autowired
+    private ConfigMapper configMapper;
 
     @Autowired
     private JavaMailSender javaMailSender;

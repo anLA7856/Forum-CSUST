@@ -62,7 +62,8 @@ public class LoginService {
         user.setActivateCode(activateCode);
         user.setJoinTime(MyUtil.formatDate(new Date()));
         user.setUsername("DF"+new Random().nextInt(10000)+"号");
-        user.setHeadUrl(MyConstant.QINIU_IMAGE_URL +"head.jpg");
+        //头一次注册，用默认图片。
+        user.setHeadUrl(MyConstant.DEFAULT_USER_PIC);
         
 
         //发送邮件
