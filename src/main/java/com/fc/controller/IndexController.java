@@ -99,7 +99,7 @@ public class IndexController {
        
 
         // 返回图片的URL地址
-        return MyConstant.QINIU_IMAGE_URL + remoteFileName;
+        return MyConstant.DOMAIN_NAME+MyConstant.COMMENT_PICS+"/" + remoteFileName;
     }
 
 }

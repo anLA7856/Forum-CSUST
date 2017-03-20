@@ -46,7 +46,7 @@ public class UserController {
         int sessionUid = (int) session.getAttribute("uid");
         User user = userService.getProfile(sessionUid, sessionUid);
         //更改个人图像位置。
-        user.setHeadUrl("/df"+MyConstant.USER_HEAD_PICS+user.getHeadUrl());
+        user.setHeadUrl("/df/"+MyConstant.USER_HEAD_PICS+"/"+user.getHeadUrl());
         List<Post> postList =  postService.getPostList(sessionUid);
         model.addAttribute("user",user);
         model.addAttribute("postList",postList);

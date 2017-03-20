@@ -204,7 +204,6 @@
         'fontsize',
         '|',
         'link',
-        'table',
         'emotion',
         '|',
         'img',
