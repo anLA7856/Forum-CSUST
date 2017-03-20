@@ -7,6 +7,7 @@ import com.fc.service.PostService;
 import com.fc.service.UserService;
 import com.fc.util.MyConstant;
 import com.fc.service.QiniuService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -63,7 +66,7 @@ public class IndexController {
     @RequestMapping(value = "/upload.do", method = {RequestMethod.POST}, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
-    String upload(MultipartFile myFileName) throws IOException {
+    String upload(MultipartFile myFileName,HttpServletRequest request) throws IOException {
 
         // 文件类型限制
         String[] allowedType = {"image/bmp", "image/gif", "image/jpeg", "image/png"};
@@ -81,8 +84,19 @@ public class IndexController {
         String fileNameExtension = fi.substring(fi.indexOf("."), fi.length());
         // 生成云端的真实文件名
         String remoteFileName = UUID.randomUUID().toString() + fileNameExtension;
-
-        qiniuService.upload(myFileName.getBytes(), remoteFileName);
+        //直接生成并保存在本地。
+        String path = request.getSession().getServletContext().getRealPath(MyConstant.COMMENT_PICS);  
+        File targetPic = new File(path,remoteFileName);
+        // 保存
+        if(!targetPic.exists()){  
+        	targetPic.mkdirs();  
+        } 
+ 		try {
+ 			myFileName.transferTo(targetPic);
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}
+       
 
         // 返回图片的URL地址
         return MyConstant.QINIU_IMAGE_URL + remoteFileName;

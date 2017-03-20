@@ -22,7 +22,7 @@
 
 			<div class="pub-header"><span></span>&nbsp;话题发布</div>
 			<div class="pub-title">
-				<input type="text" name="title" placeholder="标题：一句话说明你遇到的问题或想分享的经验">
+				<input type="text" name="title" placeholder="标题：">
 			</div>
 			<div class="pub-topic">
 				<span>标签：</span>

@@ -61,7 +61,7 @@ public class LoginService {
         String activateCode = MyUtil.createActivateCode();
         user.setActivateCode(activateCode);
         user.setJoinTime(MyUtil.formatDate(new Date()));
-        user.setUsername("DF"+new Random().nextInt(10000)+"号");
+        user.setUsername("CSUSTer"+new Random().nextInt(10000)+"号");
         //头一次注册，用默认图片。
         user.setHeadUrl(MyConstant.DEFAULT_USER_PIC);
         
