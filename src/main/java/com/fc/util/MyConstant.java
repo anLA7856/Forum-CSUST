@@ -4,6 +4,7 @@ package com.fc.util;
 public class MyConstant {
 	//第一次默认的图片
 	public static final String DEFAULT_USER_PIC = "/df/headPicLocation/default.png";
+	public static final String USER_HEAD_PICS = "/headPicLocation/";
     //七牛云相关
     public static final String QINIU_IMAGE_URL = "你的七牛云IMAGE_URL";
     public static final String QINIU_ACCESS_KEY = "你的七牛云ACCESS_KEY";

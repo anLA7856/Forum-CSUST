@@ -80,6 +80,8 @@
         <property name="maxPoolSize" value="20"/>
         <property name="queueCapacity" value="20"/>
     </bean>
-
+	<!-- 支持上传文件 -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>  
+  
 
 </beans>

@@ -6,6 +6,7 @@ import com.fc.service.PostService;
 import com.fc.service.QiniuService;
 import com.fc.service.UserService;
 import com.fc.util.MyConstant;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -29,8 +33,7 @@ public class UserController {
     @Autowired
     private PostService postService;
 
-    @Autowired
-    private QiniuService qiniuService;
+
 
     /**
      * 查看我的个人主页
@@ -42,6 +45,8 @@ public class UserController {
     public String toMyProfile(HttpSession session,Model model) {
         int sessionUid = (int) session.getAttribute("uid");
         User user = userService.getProfile(sessionUid, sessionUid);
+        //更改个人图像位置。
+        user.setHeadUrl("/df"+MyConstant.USER_HEAD_PICS+user.getHeadUrl());
         List<Post> postList =  postService.getPostList(sessionUid);
         model.addAttribute("user",user);
         model.addAttribute("postList",postList);
@@ -132,7 +137,7 @@ public class UserController {
 
 
     @RequestMapping("/updateHeadUrl.do")
-    public String updateHeadUrl(MultipartFile myFileName,Model model,HttpSession session) throws IOException {
+    public String updateHeadUrl(MultipartFile myFileName,Model model,HttpSession session,HttpServletRequest request) throws IOException {
         // 文件类型限制
         String[] allowedType = {"image/bmp", "image/gif", "image/jpeg", "image/png"};
         boolean allowed = Arrays.asList(allowedType).contains(myFileName.getContentType());
@@ -151,11 +156,23 @@ public class UserController {
         String fileNameExtension = fi.substring(fi.indexOf("."), fi.length());
         // 生成云端的真实文件名
         String remoteFileName = UUID.randomUUID().toString() + fileNameExtension;
-        qiniuService.upload(myFileName.getBytes(), remoteFileName);
+        //直接把文件传到本地服务器就可以了。
+        String path = request.getSession().getServletContext().getRealPath(MyConstant.USER_HEAD_PICS);  
+        File targetPic = new File(path,remoteFileName);
+        // 保存
+        if(!targetPic.exists()){  
+        	targetPic.mkdirs();  
+        } 
+ 		try {
+ 			myFileName.transferTo(targetPic);
+ 		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}
+
 
         //更新数据库中头像URL
         int uid = (int) session.getAttribute("uid");
-        userService.updateHeadUrl(uid,MyConstant.QINIU_IMAGE_URL + remoteFileName);
+        userService.updateHeadUrl(uid,remoteFileName);
 
         return "redirect:toMyProfile.do";
     }
