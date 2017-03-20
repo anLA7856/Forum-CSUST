@@ -275,9 +275,11 @@
 			}
         }
         */
+        //获取层主名字。
+        var levelName = $(this).prev().prev().children("a").last().html();
 		reply.show();
 		reply.children().last().children("textarea").val("");
-		reply.children().last().children("textarea").attr("placeholder","回复层主：");
+		reply.children().last().children("textarea").attr("placeholder","回复  "+levelName+" ：");
     });
 </script>
 </body>
