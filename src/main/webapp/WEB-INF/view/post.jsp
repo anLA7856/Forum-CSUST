@@ -244,7 +244,41 @@
 			}
 			$(this).parent().submit();
         });
-    
+    //一开始，所有输入框都隐藏，点回复的时候，再展现出来。
+    $(".reply-input").hide();
+    //一旦回复，就显示。回复楼主。
+    $(".item-reply").click(function(){
+        
+        var reply = $(this).parent().prev().children().last().children().last();
+        var text = reply.children().last().children("textarea").val();
+        /*暂时不做这个，等以后优化再做。
+        if($.trim(text) != ""){
+			if(!confirm("是否放弃当前编辑内容？")){
+				return;
+			}
+        }
+        */
+        reply.show();
+        reply.children().last().children("textarea").val("");
+        reply.children().last().children("textarea").attr("placeholder","回复楼主：");
+        
+    });
+    //回复其他人。
+    $(".item-more-other").click(function(){
+        
+		var reply = $(this).parent().nextAll().last();
+		var text = reply.children().last().children("textarea").val();
+		 /*
+        if($.trim(text) != ""){
+			if(!confirm("是否放弃当前编辑内容？")){
+				return;
+			}
+        }
+        */
+		reply.show();
+		reply.children().last().children("textarea").val("");
+		reply.children().last().children("textarea").attr("placeholder","回复层主：");
+    });
 </script>
 </body>
 </html>
