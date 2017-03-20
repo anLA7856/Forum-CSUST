@@ -95,7 +95,7 @@
                                             <input type="hidden" name="pid" value="${post.pid}"/>
                                             <input type="hidden" name="rid" value="${reply.rid}"/>
                                             <textarea id="s${status.count}" name="content"></textarea>
-                                            <button type="submit">回复</button>
+                                            <button type="button"  class="reply-input-each">回复</button>
                                         </form>
                                     </div>
                                 </div><!-- 楼中楼结束 -->
@@ -233,6 +233,17 @@
             }
         });
     });
+
+    
+    $(".reply-input-each").click(function(){
+		
+		var tt = $(this).prev().val();
+			if($.trim(tt) == ""){
+				alert("回复内容不能为空");
+				return;
+			}
+			$(this).parent().submit();
+        });
     
 </script>
 </body>

@@ -6,6 +6,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<settings>
         <!--映射下划线风格到驼峰风格-->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!-- 打印查询语句 
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+        -->
 	</settings>
-
 </configuration>
