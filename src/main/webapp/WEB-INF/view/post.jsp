@@ -79,6 +79,7 @@
                                             <div class="item-more-1">
                                                 <a href="toProfile.do?uid=${comment.user.uid}" class="item-more-user">${comment.user.username}</a>
                                                 <span>：</span>
+                                                <a href="toProfile.do?uid=${comment.user.fid}" class="item-more-user">${comment.user.fromUsername}</a>
                                                 <span class="item-more-content">${comment.content}</span>
                                             </div>
 

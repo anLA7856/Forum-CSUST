@@ -4,6 +4,11 @@ package com.fc.model;
 public class Comment {
 
     private Integer cid;
+    
+    //评论区某人的在评论，在某一条回复下的评论。
+    private Integer fid;
+    
+    private String fromUsername;
 
     //评论内容
     private String content;
@@ -16,7 +21,15 @@ public class Comment {
 
     public Comment() {}
 
-    public Integer getCid() {
+    public String getFromUsername() {
+		return fromUsername;
+	}
+
+	public void setFromUsername(String fromUsername) {
+		this.fromUsername = fromUsername;
+	}
+
+	public Integer getCid() {
         return cid;
     }
 
@@ -24,7 +37,15 @@ public class Comment {
         this.cid = cid;
     }
 
-    public String getContent() {
+    public Integer getFid() {
+		return fid;
+	}
+
+	public void setFid(Integer fid) {
+		this.fid = fid;
+	}
+
+	public String getContent() {
         return content;
     }
 

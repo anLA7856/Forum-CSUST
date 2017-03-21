@@ -77,6 +77,16 @@ public class ReplyService {
         for(Reply reply : replyList){
             //列出每条回复下的评论
             List<Comment> commentList = replyMapper.listComment(reply.getRid());
+            //将每条回复的主回复人名字加进去。
+            int fid;
+            User tempUser;
+            for(int i = 0;i < commentList.size();i++){
+            	Comment c =commentList.get(i);
+            	System.out.println(c);
+            	fid = commentList.get(i).getFid();
+            	tempUser = userMapper.selectUserByUid(fid);
+            	commentList.get(i).setFromUsername(tempUser.getUsername());
+            }
             reply.setCommentList(commentList);
         }
         return replyList;

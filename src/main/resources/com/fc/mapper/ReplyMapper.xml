@@ -35,7 +35,7 @@
     </insert>
 
     <select id="listComment" resultMap="commentMap">
-        select c.cid,c.content,u.uid,u.username,u.head_url from comment c join user u on c.uid=u.uid
+        select c.cid,c.content,u.uid,c.fid,u.username,u.head_url from comment c join user u on c.uid=u.uid
         where rid=#{rid}
     </select>
 
