@@ -77,14 +77,12 @@ public class Comment {
         this.commentTime = commentTime;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "cid=" + cid +
-                ", content='" + content + '\'' +
-                ", reply=" + reply +
-                ", user=" + user +
-                ", commentTime='" + commentTime + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Comment [cid=" + cid + ", fid=" + fid + ", fromUsername="
+				+ fromUsername + ", content=" + content + ", reply=" + reply
+				+ ", user=" + user + ", commentTime=" + commentTime + "]";
+	}
+
+
 }

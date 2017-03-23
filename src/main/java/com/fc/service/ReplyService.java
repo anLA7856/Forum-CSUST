@@ -1,17 +1,21 @@
 package com.fc.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.stereotype.Service;
+
 import com.fc.async.MessageTask;
 import com.fc.mapper.MessageMapper;
 import com.fc.mapper.PostMapper;
 import com.fc.mapper.ReplyMapper;
 import com.fc.mapper.UserMapper;
-import com.fc.model.*;
+import com.fc.model.Comment;
+import com.fc.model.Post;
+import com.fc.model.Reply;
+import com.fc.model.User;
 import com.fc.util.MyConstant;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.task.TaskExecutor;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service

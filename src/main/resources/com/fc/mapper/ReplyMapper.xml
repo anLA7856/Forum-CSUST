@@ -17,6 +17,8 @@
     <resultMap type="com.fc.model.Comment" id="commentMap">
         <id column="cid" property="cid"/>
         <result column="content" property="content"/>
+        
+		<result column="fid" property="fid"/>
         <association property="user" javaType="com.fc.model.User" resultMap="userMap" />
     </resultMap>
 
@@ -35,7 +37,7 @@
     </insert>
 
     <select id="listComment" resultMap="commentMap">
-        select c.cid,c.content,u.uid,c.fid,u.username,u.head_url from comment c join user u on c.uid=u.uid
+        select c.cid,c.content,c.fid,u.uid,u.username,u.head_url from comment c join user u on c.uid=u.uid
         where rid=#{rid}
     </select>
 
