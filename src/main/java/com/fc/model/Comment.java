@@ -1,6 +1,4 @@
 package com.fc.model;
-
-
 public class Comment {
 
     private Integer cid;
